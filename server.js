@@ -4,14 +4,15 @@ const Tabelas = require('./infraestrutura/database/tabelas')
 
 const app = customExpress()
 
-conexao.connect(erro => {
-  if (erro) {
-    console.log(erro)
+conexao.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+  if (error) {
+  console.log(error)
+
+  } else {
+    console.log('The solution is: ', results[0].solution)
+
+    Tabelas.init(conexao)
   }
-
-  console.log('conectou no banco')
-
-  Tabelas.init(conexao)
 })
 
 app.listen(4000, () => {
